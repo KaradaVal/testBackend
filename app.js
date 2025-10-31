@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
+const fs = require("fs");
 
 const app = express();
 const port = 3000; // Port ini harus sama dengan yang di Dockerfile/docker-compose
@@ -19,7 +20,11 @@ const db = mysql
 
     // --- TAMBAHKAN DUA BARIS INI ---
     port: process.env.DB_PORT || 3306, // Ambil port dari env, default 3306
-    ssl: { mode: "REQUIRED" }, // Wajib untuk Aiven
+    ssl: {
+      mode: "REQUIRED",
+      // Baca file 'ca.pem' DARI DALAM path container (/app/ca.pem)
+      ca: fs.readFileSync("/app/ca.pem", "utf-8"),
+    }, // Wajib untuk Aiven
     // ------------------------------
   })
   .promise();
