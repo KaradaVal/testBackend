@@ -24,8 +24,6 @@ const db = mysql
   })
   .promise();
 
-// --- API Endpoints ---
-
 // 1. GET (Mengambil semua task)
 app.get("/api/tasks", async (req, res) => {
   try {
