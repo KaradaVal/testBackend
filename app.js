@@ -24,7 +24,7 @@ const db = mysql
       mode: "REQUIRED",
       // Baca file 'ca.pem' DARI DALAM path container (/app/ca.pem)
       ca: fs.readFileSync("/app/ca.pem", "utf-8"),
-    }, // Wajib untuk Aiven
+    },
     // ------------------------------
   })
   .promise();
